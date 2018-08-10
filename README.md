@@ -13,11 +13,9 @@ Download all video lectures from a MIT-OCW course with a single command.
 ## Instructions to download OCW using this
 
 * [mit-ocw-scrapper][1] basically needs a link to the video lectures page of a MIT-OCW course
-    (which of course has video lectures). The link would be something like [<https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/]> 
+    (which of course has video lectures). The link would be something like [<http://ocw.mit.edu/cources/college/course-title/video-lectures/]> 
 
   * Make a [virtual environment][4] for this project on your local machine and activate it.
-  
-  * Install all of the dependencies from ```requirements.txt``` file.
   
   * Copy the ```download.py``` file to the folder where you want to download the video lectures.
   
@@ -31,7 +29,7 @@ Download all video lectures from a MIT-OCW course with a single command.
 
 ## Coming Up
 
-* [mit-ocw-dl][1] only supports video content of the course presently
+* [mit-ocw-scrapper][1] only supports video content of the course presently
   but attempts are on to make it download entire contents (lecture slides, assignments, solutions etc.)
 
 ## Contact  

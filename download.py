@@ -17,7 +17,7 @@ def findName(url):
     name = url[cut_position + 1:]
     return name
 
-
+# Parse the lecture name and its links
 class lecHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if (tag == 'a'):
@@ -34,13 +34,14 @@ class lecHTMLParser(HTMLParser):
                     vid_name_list.append(lec_name)
                     flag = 0
 
-
+# Parse the link 'archive' video lecture
 class vidHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
-
         if (tag == 'a'):
             for (key, value) in attrs:
+                # Scrape all the links on the webpage
                 if (key == 'href' and (value[:22] == 'http://www.archive.org' or value[:19] == 'https://archive.org') and value.endswith( "mp4")):
+                    # If the link is of an mp4 file then append the link 
                     try:
                         if value != video_url_list[-1]:
                             print ("Video Link : ", value)
@@ -90,11 +91,11 @@ lecLinkParser = lecHTMLParser()
 with urllib.request.urlopen(str(sys.argv[1])) as url:
     lec_html = url.read()
     lecLinkParser.feed(lec_html.decode('utf-8'))
-#    lecLinkParser.close()
 
 for lec_url in lec_url_list:
     with urllib.request.urlopen(str(sys.argv[1])) as response:
-        # response = urllib.urlopen(base_url + lec_url)
+        # print(lec_url)
+        response = urllib.request.urlopen(base_url + lec_url)
         html = response.read()
         videoParser = vidHTMLParser()
         videoParser.feed(html.decode('utf-8'))
@@ -108,6 +109,6 @@ for vid_url in video_url_list:
     if filename.exists():
         print ("Already Downloaded: " + filename.name)
     else:
-        urllib.urlretrieve(vid_url, filename.name, progress)
+        urllib.request.urlretrieve(vid_url, filename.name, progress)
     j = j + 1
     print ("Done.")
