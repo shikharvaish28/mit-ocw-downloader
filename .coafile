@@ -1,0 +1,11 @@
+[all]
+bears = LineCountBear, InvalidLinkBear, coalaBear
+files = **.py, **.md
+max_lines_per_file = 300
+[all.python]
+bears = PycodestyleBear
+files = **.py
+language = all.python
+[all.markdown]
+bears = MarkdownBear, TextLintBear
+files = **.md
