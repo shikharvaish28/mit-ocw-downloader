@@ -13,7 +13,7 @@ Download all video lectures from a MIT-OCW course with a single command.
 ## Instructions to download OCW using this
 
 * [mit-ocw-scrapper][1] basically needs a link to the video lectures page of a MIT-OCW course
-    (which of course has video lectures). The link would be something like [<http://ocw.mit.edu/cources/college/course-title/video-lectures/]> 
+    (which of course has video lectures). The link would be something like [<http://ocw.mit.edu/cources/college/course-title/video-lectures/]>
 
   * Make a [virtual environment][4] for this project on your local machine and activate it.
   
@@ -44,7 +44,7 @@ Download all video lectures from a MIT-OCW course with a single command.
 
   [coursera-dl/coursera][3]
 
-[1]: https://github.com/shikharvaish28/mit-ocw-scrapper
-[2]: https://shikharvaish.me
+[1]: https://github.com/shikharvaish28/mit-ocw-downloader
+[2]: http://shikharvaish.me
 [3]: https://github.com/coursera-dl/coursera
 [4]: https://www.pythonforbeginners.com/basics/how-to-use-python-virtualenv/

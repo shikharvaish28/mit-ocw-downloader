@@ -17,6 +17,7 @@ def findName(url):
     name = url[cut_position + 1:]
     return name
 
+
 # Parse the lecture name and its links
 class lecHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -26,13 +27,14 @@ class lecHTMLParser(HTMLParser):
                 if (value == 'bullet medialink' and key == 'class'):
                     flag = 1
                 if (key == 'href' and flag == 1):
-                    print ("Lecture Link : ", value)
+                    print("Lecture Link : ", value)
                     lec_name = findName(value)
-                    print ("Lecture Name :", lec_name)
+                    print("Lecture Name :", lec_name)
                     lec_url_list.append(value)
                     lec_name = "{:02.0f}_" + lec_name
                     vid_name_list.append(lec_name)
                     flag = 0
+
 
 # Parse the link 'archive' video lecture
 class vidHTMLParser(HTMLParser):
@@ -40,11 +42,13 @@ class vidHTMLParser(HTMLParser):
         if (tag == 'a'):
             for (key, value) in attrs:
                 # Scrape all the links on the webpage
-                if (key == 'href' and (value[:22] == 'http://www.archive.org' or value[:19] == 'https://archive.org') and value.endswith( "mp4")):
-                    # If the link is of an mp4 file then append the link 
+                if (key == 'href' and (value[:22] == 'http://www.archive.org'
+                    or value[:19] == 'https://archive.org')
+                        and value.endswith("mp4")):
+                    # If the link is of an mp4 file then append the link
                     try:
                         if value != video_url_list[-1]:
-                            print ("Video Link : ", value)
+                            print("Video Link : ", value)
                             video_url_list.append(value)
                         return
                     except IndexError:
@@ -75,7 +79,8 @@ def progress(count, block_size, total_size):
     percent = int(count * block_size * 100 / total_size)
 
     sys.stdout.write("\r ...%d%%, %d MB, %d KB/s, %d seconds   " %
-                     (percent, progress_size / (1024 * 1024), speed, time_left))
+                     (percent, progress_size / (1024 * 1024),
+                      speed, time_left))
     sys.stdout.flush()
 
 
@@ -83,9 +88,9 @@ def progress(count, block_size, total_size):
 # print ('Argument List:', str(sys.argv))
 
 if (len(sys.argv) < 2):
-    print ("Must pass a URL")
-    print ("i.e. python download.py http://ocw.mit.edu/cources/college/course-title/video-lectures/")
-    exit()
+    print("Must pass a URL")
+    print("i.e. python download.py http://ocw.mit.edu/cources/college/course-title/video-lectures/")
+    xit()
 lecLinkParser = lecHTMLParser()
 # f = urllib.urlopen(str(sys.argv[1]))
 with urllib.request.urlopen(str(sys.argv[1])) as url:
@@ -105,10 +110,11 @@ j = 0
 
 for vid_url in video_url_list:
     filename = Path(vid_name_list[j].format(j + 1) + ".mp4")
-    print("Downloading {:02d} of {:02d}: ".format(j + 1, len(video_url_list)) + filename.name)
+    print("Downloading {:02d} of {:02d}: ".format(j + 1,
+          len(video_url_list)) + filename.name)
     if filename.exists():
-        print ("Already Downloaded: " + filename.name)
+        print("Already Downloaded: " + filename.name)
     else:
         urllib.request.urlretrieve(vid_url, filename.name, progress)
     j = j + 1
-    print ("Done.")
+    print("Done.")
