@@ -64,9 +64,9 @@ def progress(count, block_size, total_size):
         skip = 100
         time_array = [0] * skip
         start_time = time.time()
-        return
-    duration = time.time() - start_time
+        return   
     progress_size = int(count * block_size)
+    duration = (time.time()+1) - start_time
     speed = int(progress_size / (1024 * duration))
     time_left = int((total_size - (count * block_size)) / (speed * 1024))
     time_array[count % skip] = time_left
@@ -77,10 +77,8 @@ def progress(count, block_size, total_size):
         time_left = time_left + t
     time_left = int(time_left / skip)
     percent = int(count * block_size * 100 / total_size)
-
-    sys.stdout.write("\r ...%d%%, %d MB, %d KB/s, %d seconds   " %
-                     (percent, progress_size / (1024 * 1024),
-                      speed, time_left))
+    sys.stdout.write("\r ...%d%%, %d MB, %d seconds   " %
+                     (percent, progress_size / (1024 * 1024), time_left))
     sys.stdout.flush()
 
 
@@ -90,7 +88,7 @@ def progress(count, block_size, total_size):
 if (len(sys.argv) < 2):
     print("Must pass a URL")
     print("i.e. python download.py http://ocw.mit.edu/cources/college/course-title/video-lectures/")
-    xit()
+    exit()
 lecLinkParser = lecHTMLParser()
 # f = urllib.urlopen(str(sys.argv[1]))
 with urllib.request.urlopen(str(sys.argv[1])) as url:
